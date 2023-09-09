@@ -1,0 +1,13 @@
+[
+    {
+        "text": "第一篇文章",
+        "url": "http://127.0.0.1:4307/apps/articleview/test/article/1.html"
+    },
+    {
+        "text": "一个文章组",
+        "isS": true,
+        "child": [
+            
+        ]
+    }
+]

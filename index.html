@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Viewer</title>
+    <link rel="stylesheet" href="./resources/default-ui.css">
+    <link rel="stylesheet" href="./lib/element-plus/element-plus.css">
+    <link rel="stylesheet" href="./resources/style.css">
+</head>
+<body>
+
+    <noscript>Please enable JavaScript to continue.</noscript>
+
+    <div id="myApp" hidden>
+        <header id="app_NavigationBar">
+            <button type="button" class="el-button button-ui" data-nav-action="-1">&lt;</button>
+            <div class="STextBox" id="nav_ArtTitleBox" tabindex="0"></div>
+            <button type="button" class="el-button button-ui" data-i18n-title="Menu"><img src="./resources/images/menu.svg" alt="三"></button>
+        </header>
+
+        <main id="app_ContentArea"></main>
+
+        <footer id="app_FooterBar">
+            <button type="button"><span class="uiText">&lt;&lt; </span><span class="describeText" data-i18n="prevArt" data-i18n-title="prevArt"></span></button>
+            <div style="flex: 1;text-align: center;display: inline-flex; justify-content: center; align-items: center;" class="uiText">
+                <button type="button" data-nav-action="-1">&lt;</button>
+                <button type="button" data-i18n-title="artindex" style="display: inline-flex;"><img src="./resources/images/menu.svg" alt="三"></button>
+                <button type="button" data-nav-action="1" >&gt;</button>
+            </div>
+            <button type="button"><span class="describeText" data-i18n="nextArt" data-i18n-title="nextArt"></span><span class="uiText"> &gt;&gt;</span></button>
+        </footer>
+    </div>
+    <div id="app"></div>
+
+    <script type="module" src="./resources/scripts/app/UrlInit.js"></script>
+    <script type="module" src="./resources/main.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,98 @@
+
+
+.button-ui {
+    font-family: monospace;
+}
+
+
+
+#myApp {
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0; /* inset: 0; */
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#app_NavigationBar, #app_FooterBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    --border-style: 1px solid #aaaaaa;
+}
+#app_NavigationBar {
+    padding: 1em;
+    border-bottom: var(--border-style);
+}
+#app_FooterBar {
+    border-top: var(--border-style);
+}
+
+#app_ContentArea {
+    flex: 1;
+    overflow: auto;
+}
+
+
+.STextBox {
+    border: 1px solid var(--border-color, black);
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    min-height: max-content;
+    line-height: 1em;
+    overflow-x: auto;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: .1s;
+    height: calc(1em + 16px);
+}
+/* .STextBox:empty::after {
+    content: "⁠";
+} */
+
+#nav_ArtTitleBox {
+    width: 20em;
+    max-width: 50%;
+    text-align: center;
+    cursor: pointer;
+    --border-color: #cccccc;
+}
+#nav_ArtTitleBox:hover {
+    background-color: var(--color-theme--btn-hover-color);
+}
+#nav_ArtTitleBox:active {
+    background-color: var(--color-theme--btn-active-color);
+}
+#nav_ArtTitleBox:focus-visible {
+    outline: 2px solid #a0cfff;
+    outline-offset: 1px;
+}
+
+#app_FooterBar button {
+    all: initial;
+    font-family: inherit;
+    cursor: pointer;
+    outline: revert;
+    padding: 0.5em;
+    font-size: large;
+    transition: .1s;
+}
+#app_FooterBar button:hover {
+    background-color: var(--color-theme--btn-hover-color);
+}
+#app_FooterBar button:active {
+    background-color: var(--color-theme--btn-active-color);
+}
+#app_FooterBar .uiText {
+    font-family: monospace;
+}
+#app_FooterBar .describeText {
+    font-family: inherit;
+}
+
+
+

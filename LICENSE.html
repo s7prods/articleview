@@ -1,0 +1,13 @@
+<title>LICENSE</title>
+<script>const LICURL = 'https://mit-license.org/';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div style="position: fixed; inset: 0; display: grid; place-items: center;">Loading, please wait...</div>
+<script>
+fetch(LICURL).then(v=>v.text()).then(text => {
+    document.documentElement.innerHTML = text.replace('<link rel="stylesheet" href="/', '<link rel="stylesheet" href="' + LICURL);
+    const css = document.createElement('style'); css.innerHTML = 'footer {display: none !important}';
+    document.documentElement.append(css);
+}).catch(error => {
+    document.write('Cannot load license information. Please <a href="javascript:location.reload()">Try again</a> or <a href="' + LICURL + '">access the LICENSE page directly</a>.')
+});
+</script>
