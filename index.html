@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./resources/default-ui.css">
     <link rel="stylesheet" href="./lib/element-plus/element-plus.css">
     <link rel="stylesheet" href="./resources/style.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' blob: data:; script-src 'self' 'unsafe-eval' 'unsafe-hashes' blob:" />
 </head>
 <body>
 
@@ -15,17 +16,18 @@
     <div id="myApp" hidden>
         <header id="app_NavigationBar">
             <button type="button" class="el-button button-ui" data-nav-action="-1">&lt;</button>
-            <div class="STextBox" id="nav_ArtTitleBox" tabindex="0"></div>
-            <button type="button" class="el-button button-ui" data-i18n-title="Menu"><img src="./resources/images/menu.svg" alt="三"></button>
+            <div class="STextBox" id="nav_ArtTitleBox" tabindex="0" data-custom-action="openArtIndex"></div>
+            <button type="button" class="el-button button-ui" data-i18n-title="Menu" data-custom-action="openMenu"><img src="./resources/images/menu.svg" alt="三"></button>
         </header>
 
+        <link rel="stylesheet" href="data:text/css,%23app_ContentArea{padding:1em}">
         <main id="app_ContentArea"></main>
 
         <footer id="app_FooterBar">
             <button type="button"><span class="uiText">&lt;&lt; </span><span class="describeText" data-i18n="prevArt" data-i18n-title="prevArt"></span></button>
             <div style="flex: 1;text-align: center;display: inline-flex; justify-content: center; align-items: center;" class="uiText">
                 <button type="button" data-nav-action="-1">&lt;</button>
-                <button type="button" data-i18n-title="artindex" style="display: inline-flex;"><img src="./resources/images/menu.svg" alt="三"></button>
+                <button type="button" data-i18n-title="artindex" style="display: inline-flex;" data-custom-action="openArtIndex"><img src="./resources/images/menu.svg" alt="三"></button>
                 <button type="button" data-nav-action="1" >&gt;</button>
             </div>
             <button type="button"><span class="describeText" data-i18n="nextArt" data-i18n-title="nextArt"></span><span class="uiText"> &gt;&gt;</span></button>

@@ -1,4 +1,6 @@
 :root {
     --color-theme--btn-hover-color: #f0f0f0;
     --color-theme--btn-active-color: #e0e0e0;
+    --color-theme--color: #000000;
+    --color-theme--background: #ffffff;
 }
