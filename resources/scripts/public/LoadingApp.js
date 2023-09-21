@@ -1,5 +1,5 @@
 /*
-LoadingApp.js
+LoadingApp.js   v1.2
     LoadingApp for Web (Genshin Impact style)
 
 License: [MIT License](https://mit-license.org)
@@ -43,7 +43,7 @@ export class LoadingApp {
         addCSS(LoadingApp_CSSContent, this._sr, true);
         this.hide();
         this.mount(MountElement);
-        setInterval(this._TimerProc, 1000 / 8, this);
+        setInterval(this._TimerProc, 100, this);
     }
 
     mount(ElementOrSelector) {
@@ -71,43 +71,84 @@ export class LoadingApp {
 
     
     // basic functions - control the loading manually
+    // If you want to use advanced functions, these are not recommended.
     hide() {
         this._el.hidden = true;
     }
     show(withText = '') {
         this._el.hidden = false;
-        if (typeof withText !== 'string') withText = '';
+        if (typeof withText === 'string') this.setText(withText);
     }
-
     setText(text = '') {
         this._lt.innerText = text;
     }
 
 
     // advanced functions - enhanced by adding Promise&Event supports
+    // you can also execute them for many times. they will be managed
+    // to make sure the loading hides after all tasks are done.
+    _ShownCounter = 0;
+    IncreaseShownCounter() {
+        if (this._ShownCounter++ < 1) {
+            this.show(null);
+        }
+        return this._ShownCounter;
+    }
+    DecreaseShownCounter() {
+        if (--this._ShownCounter < 1) {
+            this.hide();
+        }
+        return this._ShownCounter;
+    }
+    addText(text = '') {
+        const el = document.createElement('div');
+        el.append(document.createTextNode(text));
+        this._lt.append(el);
+        return el;
+    }
+
+    _AdvFuncRetValueWrapper(ret, modifiers = {}) {
+        return Object.assign(ret, modifiers);
+    }
     showDuring(duration = 5000, withText = '') {
-        this.show(withText);
-        const timer_id = setTimeout(() => this.hide(), duration);
-        return () => clearTimeout(timer_id);
+        this.IncreaseShownCounter();
+        const textNode = withText ? this.addText(withText) : null;
+        const timer_id = setTimeout(() => ((this.DecreaseShownCounter()), (textNode && textNode.remove())), duration);
+        return this._AdvFuncRetValueWrapper(() => ((clearTimeout(timer_id)), (textNode && textNode.remove())),
+            { textNode });
     }
     wait(duration = 5000, withText = '') {
         return this.showDuring(duration, withText);
     }
     waitEvent(evtObject, evtName, evtProps = {}, withText = '') {
-        const listener = () => this.hide();
+        const textNode = withText ? this.addText(withText) : null;
+        const listener = () => ((this.DecreaseShownCounter()), (textNode && textNode.remove()));
         const rropt = Object.assign({ once: true }, evtProps);
-        this.show(withText);
+        this.IncreaseShownCounter();
         evtObject.addEventListener(evtName, listener, rropt);
-        return () => evtObject.removeEventListener(evtName, listener, rropt);
+        return this._AdvFuncRetValueWrapper(() => ((evtObject.removeEventListener(evtName, listener, rropt)), (textNode && textNode.remove())),
+            { textNode });
     }
     waitUntil(toWait) {
         if (toWait instanceof Promise) {
-            this.show(arguments[1]);
-            toWait.finally(() => this.hide());
-            return true;
+            this.IncreaseShownCounter();
+            const textNode = arguments[1] ? this.addText(arguments[1]) : null;
+            toWait.finally(() => ((this.DecreaseShownCounter()), (textNode && textNode.remove())));
+            return this._AdvFuncRetValueWrapper({ success: true }, { textNode });
         }
         if (toWait instanceof EventTarget) {
             return this.waitEvent.apply(this, arguments);
+        }
+        if (typeof toWait === 'function') {
+            const textNode = arguments[1] ? this.addText(arguments[1]) : null;
+            const ret = { textNode };
+            const func_Result = toWait.call(this, ret);
+            if (func_Result instanceof Promise) {
+                const fr = this.waitUntil(func_Result);
+                func_Result.finally(() => (textNode && textNode.remove()));
+                return fr;
+            }
+            return this._AdvFuncRetValueWrapper(ret);
         }
         return false;
     }
@@ -124,6 +165,7 @@ export const LoadingApp_CSSContent = `
     align-items: center;
     justify-content: center;
     z-index: 999999;
+    user-select: none;
 
     --loadingapp-background: rgba(0, 0, 0, 0.5);
     --loadingapp-spinner-size: 80px;
@@ -134,6 +176,8 @@ export const LoadingApp_CSSContent = `
 .LoadingApp .LoadingApp_Content {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .LoadingApp .LoadingApp_Spinner {
     flex: 1;
@@ -152,6 +196,13 @@ export const LoadingApp_CSSContent = `
     border-radius: 50%;
     box-shadow: 0 0 15px 0 var(--loadingapp-spinner-xolor);
     transform: translate(-50%, -50%);
+}
+.LoadingApp .LoadingApp_Text {
+    color: white;
+    text-align: center;
+}
+.LoadingApp .LoadingApp_Text:not(:empty) {
+    margin-top: 1.5em;
 }
 
 .LoadingApp .LoadingApp_SpinContext_Item.LoadingApp_Num_0 { opacity: 1; }

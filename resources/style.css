@@ -50,12 +50,16 @@
     box-sizing: border-box;
     min-height: max-content;
     line-height: 1em;
-    overflow-x: auto;
+    overflow-x: /*auto*/hidden;
     overflow-y: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     transition: .1s;
     height: calc(1em + 16px);
+    /*display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;*/
 }
 /* .STextBox:empty::after {
     content: "⁠";

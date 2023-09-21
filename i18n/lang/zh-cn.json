@@ -2,5 +2,11 @@
   "prevArt": "上一篇",
   "nextArt": "下一篇",
   "artindex": "目录",
-  "Menu": "菜单"
+  "Menu": "菜单",
+  "Loading_themes": "正在加载主题... (%1/%2)",
+  "dialog.cancel": "取消",
+  "dialog.ok": "确定",
+  "inputurl": "输入 URL",
+  "inputurl_a": "请输入文章地址",
+  "inputurl_i": "请输入索引文件地址"
 }

@@ -14,7 +14,7 @@ import { createApp } from '../lib/vue/vue.esm-browser.js';
 import VApp from '../vapp/vapp.js';
 import ElementPlus from '../lib/element-plus/index.full.mjs.js';
 const vapp = createApp(VApp);
-vapp.config.unwrapInjectedRef = true;
+//vapp.config.unwrapInjectedRef = true; // vue.esm-browser.js:1513 [Vue warn]: app.config.unwrapInjectedRef has been deprecated. 3.3 now alawys unwraps injected refs in Options API.
 vapp.config.compilerOptions.isCustomElement = (tag) => tag.includes('-');
 vapp.config.compilerOptions.comments = true;
 vapp.use(ElementPlus);
@@ -25,9 +25,11 @@ for (const i of document.querySelectorAll('[data-custom-action="openArtIndex"]')
 for (const i of document.querySelectorAll('[data-custom-action="openMenu"]')) i.onclick = () => globalThis.appInstance_.vapp.showAppMenu = true;
 
 
+import('./scripts/app/router.js');
+
 
 myApp.hidden = false;
-appInstance_.ls.hide();
+appInstance_.Sp.done();
 
 
 

@@ -1,6 +1,9 @@
 export default `
 <ElDrawer v-model="showArtIndex" :with-header="false" direction="ltr" size="300px">
-    Hello World
+    <ElEmpty description="Nothing" v-if="artIndexData.length < 1" />
+    <ElMenu v-else default-active="/" mode="vertical" @select="handleIndexMenuSelect">
+        <SideBarArtIndex :data="artIndexData" />
+    </ElMenu>
 </ElDrawer>
 
 <ElDrawer v-model="showAppMenu" :with-header="false" direction="rtl" size="300px">
@@ -17,8 +20,28 @@ export default `
             <ElMenuItem index="#v=a">输入文章地址</ElMenuItem>
             <ElMenuItem index="#v=i">输入索引地址</ElMenuItem>
         </ElSubMenu>
-        <ElMenuItem index="#set">设置</ElMenuItem>
-        <ElMenuItem index="#about">关于</ElMenuItem>
+        <template v-for="(item, index) in customMenuArea">
+            <template v-if="Array.isArray(item)">
+                <ElSubMenu :index="('$it_t_'+index)">
+                    <template #title>{{item.text}}</template>
+                    <template v-for="i in item">
+                        <ElMenuItem :index="'#h='+i.url" v-text="i.text"></ElMenuItem>
+                    </template>
+                </ElSubMenu>
+            </template>
+            <template v-else>
+                <ElMenuItem :index="'#h='+item.url" v-text="item.text"></ElMenuItem>
+            </template>
+        </template>
+        <ElMenuItem index="#h=/survey/">问卷</ElMenuItem>
+        <ElMenuItem index="#h=/settings/">设置</ElMenuItem>
+        <ElMenuItem index="#h=/about/">关于</ElMenuItem>
     </ElMenu>
 </ElDrawer>
+
+<component is="style">
+.el-menu {
+    border-right: 0;
+}
+</component>
 `;
