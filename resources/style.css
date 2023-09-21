@@ -3,6 +3,9 @@
 .button-ui {
     font-family: monospace;
 }
+*[hidden] {
+    display: none !important;
+}
 
 
 
@@ -98,6 +101,13 @@
 #app_FooterBar .describeText {
     font-family: inherit;
 }
+
+
+
+
+
+
+
 
 
 

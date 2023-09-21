@@ -1,5 +1,4 @@
 
-globalThis.appInstance_ = Object.create(Object.prototype);
 
 
 import { InitI18n } from "./scripts/public/i18n.js";
@@ -28,6 +27,7 @@ for (const i of document.querySelectorAll('[data-custom-action="openMenu"]')) i.
 
 
 myApp.hidden = false;
+appInstance_.ls.hide();
 
 
 

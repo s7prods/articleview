@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./resources/default-ui.css">
     <link rel="stylesheet" href="./lib/element-plus/element-plus.css">
     <link rel="stylesheet" href="./resources/style.css">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' blob: data:; script-src 'self' 'unsafe-eval' 'unsafe-hashes' blob:" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * blob:; style-src 'self' 'unsafe-inline' blob: data:; script-src 'self' 'unsafe-eval' 'unsafe-hashes' blob:" />
 </head>
 <body>
 
@@ -32,10 +32,13 @@
             </div>
             <button type="button"><span class="describeText" data-i18n="nextArt" data-i18n-title="nextArt"></span><span class="uiText"> &gt;&gt;</span></button>
         </footer>
+
+
     </div>
     <div id="app"></div>
 
     <script type="module" src="./resources/scripts/app/UrlInit.js"></script>
+    <script type="module" src="./resources/scripts/app/SysInit.js"></script>
     <script type="module" src="./resources/main.js"></script>
     
 </body>
