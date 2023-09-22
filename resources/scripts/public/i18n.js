@@ -70,7 +70,7 @@ export async function InitI18n(LangFile) {
 
 
     if (!Reflect.has(globalThis, 'i18n')) Object.defineProperty(globalThis, 'i18n', {
-        value() { return run_i18n.apply(chrome.i18n, arguments) },
+        value() { return run_i18n.apply(null, arguments) },
         writable: true,
         enumerable: true,
         configurable: true,
