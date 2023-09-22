@@ -27,7 +27,7 @@ export function RegisterUrlObject(name, getFunc, setFunc = null, checkIfChanged 
                     setFunc(value.href, getFunc);
                     return true;
                 }
-                globalThis.location = value;
+                globalThis.location = value; // TODO
                 return true;
             },
         })
