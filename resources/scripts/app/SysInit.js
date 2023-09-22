@@ -1,4 +1,5 @@
 import './UrlInit.js';
+import { InitI18n } from "../public/i18n.js";
 
 globalThis.appInstance_ = Object.create(Object.prototype);
 
@@ -14,11 +15,13 @@ globalThis.appInstance_.sp = new Promise(r => {
         } catch {}
         delete globalThis.appInstance_.sp; delete globalThis.appInstance_.Sp; r(true);
     };
-
-    const script = document.createElement('script');
-    script.type = 'module';
-    script.src = './resources/main.js';
-    (document.body || document.documentElement).append(script);
+    
+    InitI18n('./i18n/lang/zh-cn.json').then(() => {
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = './resources/main.js';
+        (document.body || document.documentElement).append(script);
+    }).catch(err => setTimeout(() => { throw (err) }));
 });
 appInstance_.ls.waitUntil(globalThis.appInstance_.sp);
 

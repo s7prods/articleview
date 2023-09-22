@@ -1,5 +1,5 @@
 /*
-LoadingApp.js   v1.2
+LoadingApp.js   v1.3
     LoadingApp for Web (Genshin Impact style)
 
 License: [MIT License](https://mit-license.org)
@@ -10,7 +10,20 @@ Author: [shc0743](https://github.com/shc0743/)
 
 
 
-import { addCSS } from './BindMove.js';
+// to avoid external resource usage
+function addCSS(css, el = null, adopt = false) {
+    if ((el === null || adopt) && ('adoptedStyleSheets' in document)) {
+        const style = new CSSStyleSheet;
+        style.replace(css);
+        (el || document).adoptedStyleSheets.push(style);
+        return style;
+    } else {
+        let EL = document.createElement('style');
+        EL.innerHTML = css;
+        (el || document.head || document.documentElement).append(EL);
+        return EL;
+    }
+}
 
 
 export class LoadingApp {

@@ -14,7 +14,7 @@
         },
     });
     const global_error_handler = function (ev) {
-        // try { globalThis.appInstance_.load_tip.done() } catch { };
+        try { globalThis.appInstance_.ls.hide() } catch (error) { };
 
         const el = c.div;
         el.id = 'error-mask';
