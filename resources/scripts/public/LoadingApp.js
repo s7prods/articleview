@@ -27,11 +27,14 @@ function addCSS(css, el = null, adopt = false) {
 
 
 export class LoadingApp {
-    _el;
-    _sr;
-    _lt;
+    // some devices doesn't support this
+    // _el;
+    // _sr;
+    // _lt;
 
     constructor(MountElement = null) {
+        this._ShownCounter = 0;
+
         if (!MountElement || !MountElement instanceof HTMLElement) MountElement = document.body || document.documentElement;
         this._el = document.createElement('div');
         this._sr = this._el.attachShadow({ mode: 'open' });
@@ -100,7 +103,7 @@ export class LoadingApp {
     // advanced functions - enhanced by adding Promise&Event supports
     // you can also execute them for many times. they will be managed
     // to make sure the loading hides after all tasks are done.
-    _ShownCounter = 0;
+    // _ShownCounter = 0;
     IncreaseShownCounter() {
         if (this._ShownCounter++ < 1) {
             this.show(null);
