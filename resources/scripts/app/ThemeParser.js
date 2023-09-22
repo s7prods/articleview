@@ -1,4 +1,16 @@
-import { addCSS } from '../public/BindMove.js';
+function addCSS(css, el = null, adopt = false) {
+    if ((el === null || adopt) && ('adoptedStyleSheets' in document)) {
+        const style = new CSSStyleSheet;
+        style.replace(css);
+        (el || document).adoptedStyleSheets.push(style);
+        return style;
+    } else {
+        let EL = document.createElement('style');
+        EL.innerHTML = css;
+        (el || document.head || document.documentElement).append(EL);
+        return EL;
+    }
+}
     
 
 let last_theme = null, last_theme_data = {};
