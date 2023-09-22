@@ -26,7 +26,7 @@ Usage:
             <!--html--><span id=test1 data-i18n="i18nKey1"></span>
             /~javascript~/document.getElementById('test1').dataset.i18n = 'i18nKey2'
 */
-alert('i18n js')
+
 
 export async function InitI18n(LangFile) {
     const dict = await (await fetch(LangFile)).json();
