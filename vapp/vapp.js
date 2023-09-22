@@ -1,6 +1,6 @@
 import vappHtml from "./vapp.html.js";
 import sidebarArtindex from "./sidebar-artindex.js";
-import { ElMessageBox } from "../lib/element-plus/index.full.mjs.js";
+import { ElMessage, ElMessageBox } from "../lib/element-plus/index.full.mjs.js";
 export default {
     data() {
         return {
@@ -61,6 +61,7 @@ export default {
     },
     mounted() {
         globalThis.appInstance_.vapp = this;
+        globalThis.addEventListener('error', ev => ElMessage.error('unexpected '+ev.error));
     },
     template: vappHtml,
 };

@@ -8,6 +8,10 @@ globalThis.appInstance_.ls = new LoadingApp(); // Loading State
 globalThis.appInstance_.Sp = {};
 globalThis.appInstance_.sp = new Promise(r => {
     globalThis.appInstance_.Sp.done = () => {
+        try {
+            window.removeEventListener('error', window.global_error_handler);
+            document.getElementById('ui-loading-content').remove();
+        } catch {}
         delete globalThis.appInstance_.sp; delete globalThis.appInstance_.Sp; r(true);
     };
 

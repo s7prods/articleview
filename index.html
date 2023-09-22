@@ -13,6 +13,13 @@
 
     <noscript>Please enable JavaScript to continue.</noscript>
 
+    <div class="ui-loading-content" id="ui-loading-content">
+        <style>.ui-loading-content { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }</style>
+        <div id="loading-masks">
+            Loading...
+        </div>
+    </div>
+
     <div id="myApp" hidden>
         <header id="app_NavigationBar">
             <button type="button" class="el-button button-ui" data-nav-action="-1">&lt;</button>
@@ -35,6 +42,8 @@
     </div>
     <div id="app"></div>
 
+    <script src="./resources/scripts/app/global_err_handler.js"></script>
+    <script nomodule src="./resources/scripts/app/nomodule.js"></script>
     <script type="module" src="./resources/scripts/app/SysInit.js"></script>
     
 </body>
